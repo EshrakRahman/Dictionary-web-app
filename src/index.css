@@ -1,68 +1,185 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@import "tailwindcss";
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+/* =========================
+   Variable Font Faces
+   ========================= */
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+@font-face {
+  font-family: "Inconsolata";
+  src: url("./assets/fonts/inconsolata/Inconsolata-VariableFont_wdth,wght.ttf")
+    format("truetype");
+  font-weight: 200 900;
+  font-style: normal;
+  font-display: swap;
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+@font-face {
+  font-family: "Inter";
+  src: url("./assets/fonts/inter/Inter-VariableFont_slnt,wght.ttf")
+    format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+@font-face {
+  font-family: "Lora";
+  src: url("./assets/fonts/lora/Lora-VariableFont_wght.ttf") format("truetype");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+/* =========================
+   Theme Tokens (Tailwind v4)
+   ========================= */
+
+@theme {
+  /* Colors */
+  --color-dark-900: #050505;
+  --color-dark-800: #1f1f1f;
+  --color-dark-700: #2d2d2d;
+  --color-dark-600: #3a3a3a;
+
+  --color-light-400: #757575;
+  --color-light-300: #e9e9e9;
+  --color-light-200: #f4f4f4;
+  --color-light-100: #ffffff;
+
+  --color-accent-purple: #a445ed;
+  --color-accent-red: #ff5252;
+
+  /* Font families */
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-serif: "Lora", serif;
+  --font-mono: "Inconsolata", monospace;
+
+  /* Type scale */
+  --text-heading-l: 64px;
+  --leading-heading-l: 77px;
+
+  --text-heading-m: 24px;
+  --leading-heading-m: 29px;
+
+  --text-heading-s: 20px;
+  --leading-heading-s: 24px;
+
+  --text-body-m: 18px;
+  --leading-body-m: 24px;
+
+  --text-body-s: 14px;
+  --leading-body-s: 17px;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
+/* =========================
+   Base Font Switching
+   ========================= */
+
+@layer base {
+  body {
+    font-family: var(--font-sans);
+  }
+
+  [data-font="sans"] {
+    font-family: var(--font-sans);
+  }
+
+  [data-font="serif"] {
+    font-family: var(--font-serif);
+  }
+
+  [data-font="mono"] {
+    font-family: var(--font-mono);
+  }
+}
+
+/* =========================
+   Typography Utilities
+   ========================= */
+
+@layer utilities {
+  .heading-l {
+    font-size: var(--text-heading-l);
+    line-height: var(--leading-heading-l);
+    font-weight: 700;
+  }
+
+  .heading-m {
+    font-size: var(--text-heading-m);
+    line-height: var(--leading-heading-m);
+    font-weight: 700;
+  }
+
+  .heading-s {
+    font-size: var(--text-heading-s);
+    line-height: var(--leading-heading-s);
+    font-weight: 700;
+  }
+
+  .body-m {
+    font-size: var(--text-body-m);
+    line-height: var(--leading-body-m);
+    font-weight: 400;
+  }
+
+  .body-s {
+    font-size: var(--text-body-s);
+    line-height: var(--leading-body-s);
+    font-weight: 400;
+  }
+}
+
+@layer utilities {
+  /* Switch wrapper */
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+  }
+
+  /* Hide checkbox */
+  .switch-input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  /* Slider track */
+  .switch-slider {
+    position: absolute;
+    inset: 0;
+    cursor: pointer;
+    background-color: var(--color-light-400);
+    transition: background-color 0.25s ease;
+    border-radius: 9999px;
+  }
+
+  /* Slider knob */
+  .switch-slider::before {
+    content: "";
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    left: 2px;
+    bottom: 2px;
     background-color: #ffffff;
+    border-radius: 9999px;
+    transition: transform 0.25s ease;
   }
-  a:hover {
-    color: #747bff;
+
+  /* Checked state */
+  .switch-input:checked + .switch-slider {
+    background-color: var(--color-accent-purple);
   }
-  button {
-    background-color: #f9f9f9;
+
+  .switch-input:checked + .switch-slider::before {
+    transform: translateX(20px);
+  }
+
+  /* Focus state */
+  .switch-input:focus + .switch-slider {
+    box-shadow: 0 0 0 1px var(--color-accent-purple);
   }
 }
