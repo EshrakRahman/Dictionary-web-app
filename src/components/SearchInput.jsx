@@ -8,7 +8,6 @@ export default function SearchInput() {
 
   function handleWordInput(e) {
     setInputWord(e.target.value);
-    console.log(inputWord);
   }
 
   function handleSearchWord(e) {

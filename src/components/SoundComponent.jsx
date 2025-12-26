@@ -1,21 +1,21 @@
 import { useContext, useRef, useEffect } from "react";
 import { PlayIcon } from "@/assets";
 import { WordContext } from "@/context/WordContext";
-
 export default function SoundComponent() {
   const { wordData } = useContext(WordContext);
   const audioRef = useRef(null);
 
-  if (!wordData) return null;
-  const phoneticText = wordData.phonetics?.find((p) => p.text)?.text || "";
+  const phoneticText = wordData?.phonetics?.find((p) => p.text)?.text || "";
 
   useEffect(() => {
-    if (wordData.audio) {
+    if (wordData?.audio) {
       audioRef.current = new Audio(wordData.audio);
     } else {
       audioRef.current = null;
     }
-  }, [wordData.audio]);
+  }, [wordData?.audio]);
+
+  if (!wordData) return null;
 
   function handlePlay() {
     if (!audioRef.current) return;
