@@ -1,8 +1,14 @@
+import { useContext } from "react";
 import PartsOfSpeech from "./PartsOfSpeech";
+import { WordContext } from "@/context/WordContext";
 
 export default function MeaningComponent() {
+  const { wordData } = useContext(WordContext);
+
   return (
     <>
+      <PartsOfSpeech partsOfSpeech={wordData} />
+
       <section className="pl-3">
         <p className="font-normal  pb-3 text-base dark:text-light-400 ">
           Meaning
