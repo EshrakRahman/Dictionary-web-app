@@ -1,6 +1,5 @@
+import { useContext, useRef, useEffect } from "react";
 import { PlayIcon } from "@/assets";
-import PartsOfSpeech from "./PartsOfSpeech";
-import { useContext, useRef } from "react";
 import { WordContext } from "@/context/WordContext";
 
 export default function SoundComponent() {
@@ -8,33 +7,36 @@ export default function SoundComponent() {
   const audioRef = useRef(null);
 
   if (!wordData) return null;
+  const phoneticText = wordData.phonetics?.find((p) => p.text)?.text || "";
+
+  useEffect(() => {
+    if (wordData.audio) {
+      audioRef.current = new Audio(wordData.audio);
+    } else {
+      audioRef.current = null;
+    }
+  }, [wordData.audio]);
 
   function handlePlay() {
-    if (!wordData.audio) return;
-
-    if (!audioRef.current) {
-      audioRef.current = new Audio(wordData.audio);
-    }
-
+    if (!audioRef.current) return;
     audioRef.current.play();
   }
+
   return (
-    <>
-      <section className="flex justify-between items-center">
-        <div className="left">
-          <h1 className="font-bold text-4xl text-dark-700 dark:text-light-100">
-            {wordData.word}
-          </h1>
-          <p className="body-m text-accent-purple">{wordData.phonetic}</p>
-        </div>
-        <button
-          onClick={handlePlay}
-          disabled={!wordData.audio}
-          className="disabled:opacity-50 hover:cursor-pointer"
-        >
-          <img src={PlayIcon} alt="play icon" />
-        </button>
-      </section>
-    </>
+    <section className="flex justify-between items-center">
+      <div className="left">
+        <h1 className="font-bold text-4xl text-dark-700 dark:text-light-100">
+          {wordData.word}
+        </h1>
+        <p className="body-m text-accent-purple">{phoneticText}</p>
+      </div>
+      <button
+        onClick={handlePlay}
+        disabled={!wordData.audio}
+        className="disabled:opacity-50 hover:cursor-pointer"
+      >
+        <img src={PlayIcon} alt="play icon" />
+      </button>
+    </section>
   );
 }

@@ -21,7 +21,7 @@ export default function SearchInput() {
     <>
       <div className="relative w-full py-10">
         <input
-          className="w-full h-12 rounded-lg bg-dark-800 pl-3 pr-10 text-light-100 placeholder:text-light-400 
+          className="w-full h-12 rounded-lg dark:bg-dark-800 bg-light-200 pl-3 pr-10 text-dark-700 dark:text-light-100 placeholder:text-light-400 
           outline-none ring-1 ring-transparent focus:ring-2 focus:ring-accent-purple"
           type="text"
           placeholder="Search a word"
