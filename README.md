@@ -1,16 +1,147 @@
-# React + Vite
+# 📖 Dictionary Web App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Dictionary Web App Preview](./preview.jpg)
 
-Currently, two official plugins are available:
+A modern dictionary web application built as part of the **Frontend Mentor – Dictionary Web App Challenge**.  
+The app allows users to search for word definitions, hear pronunciations, and customize the reading experience with font and theme controls.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🔗 **Live Site:** https://dictionarywebe.netlify.app/  
+🔗 **GitHub Repo:** https://github.com/EshrakRahman/Dictionary-web-app
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 📌 Overview
 
-## Expanding the ESLint configuration
+### 🎯 The Challenge
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Users should be able to:
+
+- Search for words using the input field
+- View definitions from the **Free Dictionary API**
+- See validation feedback when submitting an empty search
+- Play pronunciation audio when available
+- Switch between **Sans Serif**, **Serif**, and **Monospace** fonts
+- Toggle between **Light** and **Dark** themes
+- Experience a responsive layout across devices
+- See hover and focus states for all interactive elements
+- **Bonus:** Automatically respect system color preference using `prefers-color-scheme`
+
+---
+
+## 🖼 Screenshot
+
+> Add a file named `preview.jpg` at the root of your project to display the image above.
+
+---
+
+## 🛠 Installation & Setup
+
+To run this project locally:
+
+### 1️⃣ Clone the repository
+
+```bash
+git clone https://github.com/EshrakRahman/Dictionary-web-app.git
+```
+
+### 2️⃣ Navigate to the project directory
+
+```bash
+cd Dictionary-web-app
+```
+
+### 3️⃣ Install dependencies
+
+```bash
+npm install
+```
+
+### 4️⃣ Start the development server
+
+```bash
+npm run dev
+```
+
+The app will be available at:
+
+```
+http://localhost:5173
+```
+
+---
+
+## 🛠 My Process
+
+### 🚀 Built With
+
+- Semantic HTML5
+- Tailwind CSS (v4 theme tokens)
+- CSS custom properties
+- Mobile-first workflow
+- **React + Vite**
+- React Context API (state management)
+- Axios (API requests)
+- Free Dictionary API
+
+---
+
+### 📚 What I Learned
+
+- Managing **global state** cleanly using multiple contexts
+- Proper handling of **async API states** (loading, success, error)
+- Implementing **audio playback** safely with React refs
+- Avoiding common hook pitfalls (rules of hooks)
+- Creating **theme + font switching** using CSS variables
+- Building scalable UI logic instead of hard-coded components
+
+Example of safe audio handling:
+
+```js
+useEffect(() => {
+  if (!audioSrc) return;
+  audioRef.current = new Audio(audioSrc);
+
+  return () => {
+    audioRef.current.pause();
+    audioRef.current = null;
+  };
+}, [audioSrc]);
+```
+
+---
+
+### 🔮 Continued Development
+
+- Improve accessibility (ARIA roles, keyboard support)
+- Cache previous searches
+- Add animations for transitions
+- Improve error UI with illustrations
+- Add language support
+
+---
+
+### 🔗 Useful Resources
+
+- [Free Dictionary API](https://dictionaryapi.dev/)
+- [Frontend Mentor](https://www.frontendmentor.io/)
+- [React Docs – Context](https://react.dev/reference/react/useContext)
+- [Tailwind CSS Docs](https://tailwindcss.com/docs)
+
+---
+
+## 👤 Author
+
+- **GitHub:** [@EshrakRahman](https://github.com/EshrakRahman)
+- **Frontend Mentor:** [@EshrakRahman](https://www.frontendmentor.io/profile/EshrakRahman)
+
+---
+
+## 🙏 Acknowledgments
+
+- Frontend Mentor for the excellent challenge
+- The open-source community for tools and documentation
+- Free Dictionary API for providing pronunciation data
+
+---
+
+⭐ If you like this project, consider giving it a star!
