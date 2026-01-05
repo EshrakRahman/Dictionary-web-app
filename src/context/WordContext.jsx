@@ -13,42 +13,36 @@ export function WordContextProvider({ children }) {
   useEffect(() => {
     if (!searchWord) return;
 
+    setLoading(true);
+    setError(null);
+    setWordData(null);
+
     axios
       .get(`https://api.dictionaryapi.dev/api/v2/entries/en/${searchWord}`)
       .then((res) => {
-        const data = res.data[0];
-        const audio = data.phonetics.find((p) => p.audio)?.audio || null;
-
-        setWordData({
-          word: data.word,
-          audio,
-          phonetics: data.phonetics,
-          meanings: data.meanings,
-          sourceUrls: data.sourceUrls,
-        });
+        setWordData(res.data[0]);
       })
-      .catch((error) => {
-        setError("Word not Found");
-        setWordData(null);
+      .catch(() => {
+        setError("No definitions found for this word.");
       })
-      .finally(() => setLoading(false));
+      .finally(() => {
+        setLoading(false);
+      });
   }, [searchWord]);
 
   return (
-    <>
-      <WordContext.Provider
-        value={{
-          inputWord,
-          setInputWord,
-          searchWord,
-          setSearchWord,
-          wordData,
-          loading,
-          error,
-        }}
-      >
-        {children}
-      </WordContext.Provider>
-    </>
+    <WordContext.Provider
+      value={{
+        inputWord,
+        setInputWord,
+        searchWord,
+        setSearchWord,
+        wordData,
+        loading,
+        error,
+      }}
+    >
+      {children}
+    </WordContext.Provider>
   );
 }
